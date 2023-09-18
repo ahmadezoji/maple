@@ -1,3 +1,5 @@
+import React, { Suspense } from "react";
+
 import { Col, Row } from "reactstrap";
 import SalesChart from "../components/dashboard/SalesChart";
 import Feeds from "../components/dashboard/Feeds";
@@ -43,8 +45,28 @@ const BlogData = [
     btnbg: "primary",
   },
 ];
-
 const Starter = () => {
+  const [products,setProducts] = React.useState([])
+  const fetchUserData = () => {
+    fetch("http://localhost:8000/trandyol/fetch", {
+      method: 'GET',
+     
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        // console.log(data);
+        setProducts(data)
+      })
+
+  }
+
+  React.useEffect(() => {
+    fetchUserData()
+  }, [])
+
+
   return (
     <div>
       {/***Top Cards***/}
@@ -59,14 +81,14 @@ const Starter = () => {
         </Col>
       </Row>
       {/***Table ***/}
-      <Row>
+      {/* <Row>
         <Col lg="12">
           <ProjectTables />
         </Col>
-      </Row>
+      </Row> */}
       {/***Blog Cards***/}
       <Row>
-        {BlogData.map((blg, index) => (
+        {/* {BlogData.map((blg, index) => (
           <Col sm="6" lg="6" xl="3" key={index}>
             <Blog
               image={blg.image}
@@ -74,6 +96,17 @@ const Starter = () => {
               subtitle={blg.subtitle}
               text={blg.description}
               color={blg.btnbg}
+            />
+          </Col>
+        ))} */}
+        {products.map((blg, index) => (
+          <Col sm="6" lg="6" xl="3" key={index}>
+            <Blog
+              image={blg.image}
+              title={blg.title}
+              subtitle={" "}
+              text={blg.price}
+              color={null}
             />
           </Col>
         ))}

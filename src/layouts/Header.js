@@ -36,7 +36,8 @@ const Header = () => {
           <Logo />
         </div>
         <NavbarBrand href="/">
-          <LogoWhite className=" d-lg-none" />
+          {/* <LogoWhite className=" d-lg-none" /> */}
+          {/* <img src={mapleLogo} width={20} height={20}/> */}
         </NavbarBrand>
         <Button
           color="primary"
